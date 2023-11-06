@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 import axios from "axios";
 
@@ -12,59 +12,65 @@ function App() {
 
     const apiKey = process.env.REACT_APP_API_KEY;
 
+    const getToday = useCallback(
+        async (latitude, longitude) => {
+            try {
+                const response = await axios.get(
+                    `${process.env.REACT_APP_API_TODAY}lat=${latitude}&lon=${longitude}&units=metric&lang=pt_br&appid=${apiKey}`
+                );
+
+                console.log(response.data);
+
+                setClimaToday(response.data);
+            } catch (error) {
+                console.error("Houve um erro:", error);
+            }
+        },
+        [apiKey]
+    );
+
+    const forecastData = useCallback(
+        async (latitude, longitude) => {
+            try {
+                const response = await axios.get(
+                    `${process.env.REACT_APP_API_URL}?lat=${latitude}&lon=${longitude}&units=metric&lang=pt_br&appid=${apiKey}`
+                );
+
+                console.log(response.data);
+
+                const currentData = new Date().toDateString();
+
+                const uniqueDays = {};
+
+                response.data.list.forEach((item) => {
+                    const date = new Date(item.dt * 1000).toDateString();
+
+                    if (date !== currentData) {
+                        if (!uniqueDays[date]) {
+                            uniqueDays[date] = item;
+                        }
+                    }
+                });
+
+                const uniqueHours = Object.values(uniqueDays);
+
+                setClimaData(uniqueHours);
+            } catch (error) {
+                console.error(
+                    "Ocorreu um erro ao buscar a previsão do tempo:",
+                    error
+                );
+            }
+        },
+        [apiKey]
+    );
+
     useEffect(() => {
         if (geo && geo.length > 0) {
             getToday(geo[0].lat, geo[0].lon);
             forecastData(geo[0].lat, geo[0].lon);
         }
-    }, [geo]);
-
-    const getToday = async (latitude, longitude) => {
-        try {
-            const response = await axios.get(
-                `${process.env.REACT_APP_API_TODAY}lat=${latitude}&lon=${longitude}&units=metric&lang=pt_br&appid=${apiKey}`
-            );
-
-            console.log(response.data);
-
-            setClimaToday(response.data);
-        } catch (error) {
-            console.error("Houve um erro:", error);
-        }
-    };
-
-    const forecastData = async (latitude, longitude) => {
-        try {
-            const response = await axios.get(
-                `${process.env.REACT_APP_API_URL}?lat=${latitude}&lon=${longitude}&units=metric&lang=pt_br&appid=${apiKey}`
-            );
-
-            console.log(response.data);
-
-            const currentData = new Date().toDateString();
-
-            const uniqueDays = {};
-
-            response.data.list.forEach((item) => {
-                const date = new Date(item.dt * 1000).toDateString();
-
-                if (date !== currentData) {
-                    if (!uniqueDays[date]) {
-                        uniqueDays[date] = item;
-                    }
-                }
-            });
-
-            const uniqueHours = Object.values(uniqueDays);
-
-            setClimaData(uniqueHours);
-        } catch (error) {
-            console.error(
-                "Ocorreu um erro ao buscar a previsão do tempo:",
-                error
-            );
-        }
-    };
+    }, [geo, getToday, forecastData]);
 
     const handleSubmitClima = async (e) => {
         e.preventDefault();

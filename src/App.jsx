@@ -89,9 +89,9 @@ function App() {
     };
 
     return (
-        <div className="bg-[url('/public/sky.jpg')] bg-cover w-full h-screen la">
+        <div className="bg-[url('/public/sky.jpg')] bg-cover w-full h-screen">
             <div className="container mx-auto flex flex-col items-center h-full justify-center">
-                <form onSubmit={handleSubmitClima} className="my-12">
+                <form onSubmit={handleSubmitClima} className="my-12 ldxs:my-10">
                     <h1 className="text-4xl mb-10 text-white font-bold text-center">
                         Weather Sky
                     </h1>
@@ -114,17 +114,17 @@ function App() {
                 <div
                     className={
                         climaData && climaToday
-                            ? "bg-black/25 w-11/12 md:w-4/6 p-4 xl:p-6 rounded-lg"
+                            ? "bg-black/25 w-11/12 md:w-4/6 ldxs:w-full p-4 xl:p-6 rounded-lg ldxs:flex ldxs:flex-row ldxs:gap-[10px]"
                             : ""
                     }
                 >
                     {climaToday && (
-                        <div className="border bg-slate-200 text-black rounded-lg flex flex-col items-center justify-center gap-7 py-5 md:h-[200px]">
-                            <p className="text-3xl md:text-7xl font-black">
+                        <div className="border bg-slate-200 text-black rounded-lg flex flex-col items-center justify-center gap-7 ldxs:gap-2 py-5 md:h-[200px] ldxs:h-[80px] ldxs:basis-1/5">
+                            <p className="text-3xl md:text-7xl ldxs:text-4xl font-black">
                                 {" "}
                                 {Math.round(climaToday.main.temp)}°C
                             </p>
-                            <div className="text-sm md:text-lg font-bold text-slate-500">
+                            <div className="text-sm md:text-lg ldxs:text-xs lg font-bold text-slate-500">
                                 <p>
                                     Min {Math.round(climaToday.main.temp) - 6}
                                     °C / Max{" "}
@@ -136,13 +136,13 @@ function App() {
                     )}
                     {climaData && (
                         <div className="">
-                            <ul className="mt-5 flex gap-[20px] rounded-lg flex-wrap w-100">
+                            <ul className="mt-5 ldxs:mt-0 flex gap-[10px] rounded-lg flex-wrap w-100">
                                 {climaData.map((item, index) => (
                                     <li
                                         key={index}
-                                        className="bg-gray-400 text-white flex flex-row justify-between items-center gap-3 px-2 md:px-5 flex-1 w-full md:w-2/6 h-[100px] md:h-[130px] lg:h-[150px] rounded-lg"
+                                        className="bg-gray-400 text-white flex flex-row justify-between items-center gap-3 px-2 md:px-5 flex-1 w-full md:w-2/6 ldxs:w-1/6 h-[100px] md:h-[130px] lg:h-[150px] ldxs:h-[80px] rounded-lg"
                                     >
-                                        <p className="md:text-2xl">
+                                        <p className="md:text-2xl ldxs:text-sm">
                                             {" "}
                                             {new Date(
                                                 item.dt * 1000
@@ -151,7 +151,7 @@ function App() {
                                                 month: "numeric",
                                             })}
                                         </p>
-                                        <div className="flex flex-col justify-around h-full font-bold text-2xl md:text-5xl">
+                                        <div className="flex flex-col justify-around h-full font-bold text-2xl md:text-5xl ldxs:text-xl">
                                             <p>
                                                 {Math.round(item.main.temp) + 6}
                                                 °

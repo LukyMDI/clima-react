@@ -126,9 +126,9 @@ function App() {
                             </p>
                             <div className="text-sm md:text-lg font-bold text-slate-500">
                                 <p>
-                                    Min {Math.round(climaToday.main.temp) + 6}
+                                    Min {Math.round(climaToday.main.temp) - 6}
                                     °C / Max{" "}
-                                    {Math.round(climaToday.main.temp) - 6}
+                                    {Math.round(climaToday.main.temp) + 6}
                                     °C
                                 </p>
                             </div>

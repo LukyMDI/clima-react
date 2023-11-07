@@ -89,7 +89,7 @@ function App() {
     };
 
     return (
-        <div className="bg-[url('/public/sky.jpg')] bg-cover w-full h-screen landscape:h-full">
+        <div className="bg-[url('/public/sky.jpg')] bg-cover w-full h-screen la">
             <div className="container mx-auto flex flex-col items-center h-full justify-center">
                 <form onSubmit={handleSubmitClima} className="my-12">
                     <h1 className="text-4xl mb-10 text-white font-bold text-center">
@@ -105,7 +105,7 @@ function App() {
                         />
                         <button
                             type="submit"
-                            className="bg-orange-500 font-bold text-white px-2 py-0.5 rounded h-[35px] hover:bg-sky-300 xl:h-[50px] xl:w-[100px] active:bg-sky-900"
+                            className="bg-orange-500 font-bold text-white px-2 py-0.5 rounded h-[35px] hover:bg-orange-300 xl:h-[50px] xl:w-[100px] active:bg-orange-700"
                         >
                             Buscar
                         </button>

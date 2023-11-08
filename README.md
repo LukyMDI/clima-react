@@ -1,25 +1,26 @@
 # Weather Sky 📌
 
-Site construído para visualização do clima em diferentes cidades/estados.
+Site responsivo construído para visualização do clima em diferentes cidades/estados. Basta inserir o local do qual deseja visualizar as informações, e a mesma será exibida em sua tela.
 
 ## Tecnologias
 
 -   **ReactJS**
 -   **TailwindCSS**
--   **API OpenWeather:** (https://openweathermap.org/api)
+-   **API OpenWeather:** https://openweathermap.org/api
 
 ## Instalação
 
+#### Instalar as dependências
 ```bash
-# Instalar as dependências
 npm install
-
-# Configurar a API KEY nas variáveis de ambiente (.env)
+```
+#### Configurar a API KEY nas variáveis de ambiente (.env)
+```bash
 REACT_APP_API_KEY=sua_apy_key
-
-# Rodar a aplicação
+```
+#### Rodar a aplicação
+```bash
 npm start
-
 ```
 
 ## Autor
